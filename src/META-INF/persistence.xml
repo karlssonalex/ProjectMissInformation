@@ -4,10 +4,12 @@
 		<class>projectmissinformation.model.Question</class>
 		<class>projectmissinformation.model.User</class>
 		<properties>
-			<property name="javax.persistence.jdbc.url" value="jdbc:derby:C:\Users\alex\MyDB;create=true"/>
-			<property name="javax.persistence.jdbc.user" value="root"/>
-			<property name="javax.persistence.jdbc.password" value="r00t"/>
+			<property name="javax.persistence.jdbc.url" value="jdbc:derby:C:\missinformationDB;create=true"/>
+			<property name="javax.persistence.jdbc.user" value="test"/>
+			<property name="javax.persistence.jdbc.password" value="test"/>
 			<property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver"/>
+			<property name="javax.persistence.schema-generation.database.action" value="create"/>
+			<property name="javax.persistence.schema-generation.scripts.action" value="create"/>
 		</properties>
 	</persistence-unit>
 </persistence>
