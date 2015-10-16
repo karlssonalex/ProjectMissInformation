@@ -70,5 +70,23 @@ private static final String PERSISTENCE_UNIT_NAME = "ProjectMissInformation";
 		
 		
 	}
+	
+	/**
+	 * @author Axel
+	 * @param question The question asked by the user
+	 * @param user The name of the user asking the question
+	 */
+	public void addQuestion(String question_, String user_) {
+		Question question = new Question();
+		question.setQuestion(question_);
+		question.setAnswer(user_);
+		
+		EntityManager em = factory.createEntityManager();
+		
+		em.getTransaction().begin();
+		em.persist(question);
+		em.getTransaction().commit();
+		em.close();
+	}
 
 }
