@@ -41,7 +41,7 @@ private static final String PERSISTENCE_UNIT_NAME = "ProjectMissInformation";
 	 * @author Charlotte
 	 * @param user
 	 */
-	public void addUserToDB(User user) {
+	/*public void addUserToDB(User user) {
 		EntityManager em = factory.createEntityManager();
 		
 		em.getTransaction().begin();
@@ -49,15 +49,23 @@ private static final String PERSISTENCE_UNIT_NAME = "ProjectMissInformation";
 		em.getTransaction().commit();
 		em.close();
 		
-	}
+	}*/
 	
 	/***
 	 * @author Charlotte
 	 */
 	public void createUser(String username, String password) {
+		EntityManager em = factory.createEntityManager();
+		User tempUser = new User();
+		em.getTransaction().begin();
 		
-		User user = new User(username, password);
-		addUserToDB(user);
+		tempUser.setName(username);
+		tempUser.setPassword(password);
+		tempUser.setAdmin(0);
+		
+		em.getTransaction().commit();	
+		em.close();
+		
 		System.out.println(username + password);
 		
 		

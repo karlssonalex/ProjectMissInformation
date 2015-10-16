@@ -1,11 +1,7 @@
 package projectmissinformation.model;
 
 import java.io.Serializable;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 
 /**
@@ -13,41 +9,36 @@ import javax.persistence.Table;
  * 
  */
 @Entity
-@Table(name="USERS", schema="MISSI")
+@Table(name="USERS")
 @NamedQuery(name="User.findAll", query="SELECT u FROM User u")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private String username;
+	private String name;
 
-//	private Object admin;
+	private int admin;
 
 	private String password;
 
 	public User() {
 	}
-	
-	public User(String username, String password) {
-		this.username = username;
-		this.password = password;
+
+	public String getName() {
+		return this.name;
 	}
 
-	public String getUsername() {
-		return this.username;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public void setUsername(String username) {
-		this.username= username;
+	public int getAdmin() {
+		return this.admin;
 	}
 
-//	public Object getAdmin() {
-//		return this.admin;
-//	}
-//
-//	public void setAdmin(Object admin) {
-//		this.admin = admin;
-//	}
+	public void setAdmin(int admin) {
+		this.admin = admin;
+	}
 
 	public String getPassword() {
 		return this.password;
