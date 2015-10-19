@@ -9,7 +9,9 @@ import javax.persistence.*;
  * 
  */
 @Entity
+
 @Table(name="USERS", schema="MISSAPP")
+
 @NamedQuery(name="User.findAll", query="SELECT u FROM User u")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
