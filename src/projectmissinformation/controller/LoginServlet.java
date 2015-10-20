@@ -64,7 +64,7 @@ public class LoginServlet extends HttpServlet {
 				if (c.getName().equals("user")) {
 					c.setMaxAge(0);
 					response.addCookie(c);
-					response.sendRedirect("/ProjectMissInformation/Login.html");
+					response.sendRedirect("/ProjectMissInformation/login.jsp");
 				}
 			}
 		}
@@ -102,7 +102,7 @@ public class LoginServlet extends HttpServlet {
 			response.addCookie(loginCookie);
 			response.sendRedirect("/ProjectMissInformation/home.jsp");
 		} else {
-			response.sendRedirect("/ProjectMissInformation/Login.html");
+			response.sendRedirect("/ProjectMissInformation/login.jsp");
 		}
 	}
 

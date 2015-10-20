@@ -55,7 +55,7 @@ function checkField(form) {
 		<button type="reset" value="Reset">RESET</button></td>	
 		</tr>
 		<tr>
-		<td><p>Not a member yet? Go to <a href = "Registration">registration</a>.</p></td>
+		<td><p>Not a member yet? Go to <a href="registration.jsp">registration</a>.</p></td>
 		</tr>
 		</table>
 	</form>

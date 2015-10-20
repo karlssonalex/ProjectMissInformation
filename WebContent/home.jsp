@@ -16,10 +16,10 @@
 	<br/>
 	<ul class="navbar">
 			 <li><a href="mainbox.html" target="main">Home</a></li>
-			 <li><a href="AskQuestion.jsp" target ="main">Ask for Advice</a></li>
-			 <li><a href="QOA.jsp" target ="main">Q&A</a></li>
-			 <li><a href="Contact.html" target ="main">Contact</a></li>
-			 <li><a href="Logout.html" target ="main">Logout</a></li>
+			 <li><a href="askquestion.jsp" target ="main">Ask for Advice</a></li>
+			 <li><a href="qoa.jsp" target ="main">Q&A</a></li>
+			 <li><a href="contact.html" target ="main">Contact</a></li>
+			 <li><a href="logout.html" target ="main">Logout</a></li>
 		  </ul>		  
 </div>
 		

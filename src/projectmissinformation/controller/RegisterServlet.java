@@ -53,7 +53,7 @@ import projectmissinformation.model.DBHandler;
 			
 			dbH.createUser(username, password);
 	
-			getServletContext().getRequestDispatcher("/Login.html").forward(request, response);
+			getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
 	
 		}
 	}
