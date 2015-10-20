@@ -1,7 +1,6 @@
 package projectmissinformation.controller;
 
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -14,7 +13,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import projectmissinformation.model.DBHandler;
 import projectmissinformation.model.User;
 
 /**
@@ -85,10 +86,17 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession session = request.getSession();					//ch
+		DBHandler dbh = new DBHandler();
+		
 		String username = (String) request.getParameter("user");
 		String password = (String) request.getParameter("password");
 
 		if (checkLogin(username, password)) {
+			
+			System.out.println("user" + dbh.getUser(username));		//ch
+			session.setAttribute("user", dbh.getUser(username));	//ch
+			
 			Cookie loginCookie = new Cookie("user", username);
 			loginCookie.setMaxAge(30 * 60);
 			response.addCookie(loginCookie);

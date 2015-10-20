@@ -39,6 +39,23 @@ private static final String PERSISTENCE_UNIT_NAME = "ProjectMissInformation";
 	
 	/***
 	 * @author Charlotte
+	 * Get specific user
+	 * @param name
+	 * @return
+	 */
+	public User getUser(String name) {
+		
+		List<User> userList = getUsers();
+		for(User u : userList) {
+			if(u.equals(name)) {
+				return u;
+			}
+		}
+		return new User();
+	}
+	
+	/***
+	 * @author Charlotte
 	 */
 	public void createUser(String username, String password) {
 		EntityManager em = factory.createEntityManager();
@@ -54,8 +71,6 @@ private static final String PERSISTENCE_UNIT_NAME = "ProjectMissInformation";
 		em.close();
 		
 		System.out.println(username + password);
-		
-		
 	}
 	
 	/**
@@ -66,7 +81,7 @@ private static final String PERSISTENCE_UNIT_NAME = "ProjectMissInformation";
 	public void addQuestion(String question_, String user_) {
 		Question question = new Question();
 		question.setQuestion(question_);
-		question.setAnswer(user_);
+		question.setName(user_);			//bytte från setAnswer till setName
 		
 		EntityManager em = factory.createEntityManager();
 		
@@ -75,5 +90,4 @@ private static final String PERSISTENCE_UNIT_NAME = "ProjectMissInformation";
 		em.getTransaction().commit();
 		em.close();
 	}
-
 }

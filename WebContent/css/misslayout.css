@@ -1,0 +1,146 @@
+
+html{
+height: 100%;
+width: 100%;
+}
+
+h1 {
+	color: black;
+	font-size: 20px;
+	font-family: Lucida console; margin : auto;
+	float: center;
+}
+
+p {
+	color: black;
+	font-family: "courier new";
+	font-size: 12px; margin : auto;
+	float: center;
+}
+
+button {
+  color: #000000;
+  background: white;
+  border: 1px solid #000000;
+  font-weight: bold;
+  font-family: "lucida console";
+  padding: 5px;
+}
+
+table {
+	font-family: "Courier New";
+	color: #000000;
+	padding: 5px;
+	margin: auto;
+	float: center;
+	text-align: center;
+}
+
+td {
+padding: 5px;
+}
+
+.top {
+	height: 92px;
+	width: 900px;
+	margin: auto;
+	float: center;
+}
+
+#wrap {
+	width: 100%; /* Spans the width of the page */
+	height: 50px;
+	margin: 0;
+	/* Ensures there is no space between sides of the screen and the menu */
+	z-index: 99;
+	/* Makes sure that your menu remains on top of other page elements */
+	position: absolute;
+	background-color: #000000;
+}
+
+.navbar {
+	height: 50px;
+	width: 100%;
+	padding: 0;
+	margin: auto;
+	float: center;
+	/* Ensures that the menu doesn’t affect other elements */
+	border-right: 1px solid #ffffff;
+	
+}
+
+.navbar li {
+	height: auto;
+	width: 180px; /* Each menu item is 150px wide */
+	float: left; /* This lines up the menu items horizontally */
+	text-align: center; /* All text is placed in the center of the box */
+	list-style: none;
+	/* Removes the default styling (bullets) for the list */
+	font: normal bold 12px/1.2em Arial, Verdana, Helvetica;
+	padding: 0px;
+	margin: 0px;
+	background-color: #000000;
+	position: relative;
+	z-index: 1;
+}
+
+.navbar a {
+	padding: 18px 0px;
+	/* Adds a padding on the top and bottom so the text appears centered vertically */
+	border-left: 1px solid #ffffff;
+	/* Creates a border in a slightly lighter shade of blue than the background.  Combined with the right border, this creates a nice effect. */
+	border-right: 0px solid #ffffff;
+	/* Creates a border in a slightly darker shade of blue than the background.  Combined with the left border, this creates a nice effect. */
+	text-decoration: none; /* Removes the default hyperlink styling. */
+	color: white; /* Text color is white */
+	display: block;
+}
+
+.navbar li:hover {
+	background-color: #808080;
+}
+
+.navbar a:hover {
+	background-color: #808080;
+}
+
+.navbar li ul {
+	display: none; /* Hides the drop-down menu */
+	height: auto;
+	margin: 0; /* Aligns drop-down box underneath the menu item */
+	padding: 0; /* Aligns drop-down box underneath the menu item */
+	background: #808080;
+}
+
+.navbar li:hover ul {
+	display: block;
+	/* Displays the drop-down box when the menu item is hovered over */
+}
+
+.mainbox1 {
+	border: 0;
+	width: 900px;
+	
+}
+
+.main {
+	width: 900px;
+	margin: auto;
+	float: center;
+}
+
+#nav {
+    line-height:30px;
+    background-color:#ffffff;
+    height:300px;
+    width:100px;
+    float:right;
+    padding:5px;	      
+}
+
+#center {
+	 margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width: 70%;
+}

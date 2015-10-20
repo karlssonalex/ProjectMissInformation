@@ -4,11 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link href="css/mistylesheet.css" rel="stylesheet" type="text/css" />
+<link href="css/misslayout.css" rel="stylesheet" type="text/css" />
 <title>Registration</title>
 </head>
 <body>
-
 <center>
 		<table>
 			<tr>
@@ -21,7 +20,6 @@
 							</center>
 							<br>
 							<table>
-
 								<tr>
 									<td>Username:</td>
 								</tr>
@@ -38,8 +36,8 @@
 									<td><br></td>
 								</tr>
 								<tr>
-									<td><input type="submit" value="Submit"/>&ensp;
-										<input type="reset" value="Reset"/></td>
+									<td><button type="submit" value="Submit">SUBMIT</button>&ensp;
+										<button type="reset" value="Reset">RESET</button></td>
 							</table>
 
 						</form>
