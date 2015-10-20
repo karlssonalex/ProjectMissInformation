@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <!-- @Autor: Charlotte -->
@@ -10,24 +10,47 @@
 <title>Index</title>
 
 <body>
+	<%
+		String userName = null;
 
-<div class="top">
-    <center><h1>MISS INFORMATION</h1></center>
-	<br/>
-	<ul class="navbar">
-			 <li><a href="mainbox.html" target="main">Home</a></li>
-			 <li><a href="askquestion.jsp" target ="main">Ask for Advice</a></li>
-			 <li><a href="qoa.jsp" target ="main">Q&A</a></li>
-			 <li><a href="contact.html" target ="main">Contact</a></li>
-			 <li><a href="logout.html" target ="main">Logout</a></li>
-		  </ul>		  
-</div>
-		
-<center>
-<div class="main" width = "900">
-<iframe class="mainbox1" src="mainbox.html" name ="main" width = "900" height = "550"></iframe>
-</div>
-</center>
+		Cookie[] cookies = request.getCookies();
+		if (cookies != null) {
+			for (Cookie c : cookies) {
+				if (c.getName().equals("user")) {
+					userName = c.getValue();
+					pageContext.setAttribute("user", userName);
+				}
+			}
+		}
+		if (userName == null) {
+			response.sendRedirect("login.jsp");
+		}
+	%>
+
+	<div class="top">
+		<center>
+			<h1>MISS INFORMATION</h1>
+		</center>
+		<br />
+		<ul class="navbar">
+			<li><a href="mainbox.jsp" target="main">Home</a></li>
+			<li><a href="askquestion.jsp" target="main">Ask for Advice</a></li>
+			<li><a href="qoa.jsp" target="main">Q&A</a></li>
+			<li><a href="mainbox.jsp" target="main">Contact</a></li>
+			<form action="LoginServlet" name="logoutform" method="get">
+				<input type="hidden" name="logout">
+				<li><a href="#" onclick="document.forms['logoutform'].submit(); return false;">
+						Logout </a></li>
+			</form>
+		</ul>
+	</div>
+
+	<center>
+		<div class="main" width="900">
+			<iframe class="mainbox1" src="mainbox.jsp" name="main" width="900"
+				height="550"></iframe>
+		</div>
+	</center>
 
 </body>
 

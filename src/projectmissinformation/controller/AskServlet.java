@@ -15,7 +15,7 @@ import projectmissinformation.model.DBHandler;
 import projectmissinformation.model.User;
 
 /**
- * @author Axel
+ * @author Alex
  * This servlet receives a question from user, and tells DBHandler to insert to database.
  */
 @WebServlet("/AskServlet")
@@ -27,18 +27,12 @@ public class AskServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		User user1 = new User();						//ch
-		HttpSession session = request.getSession();		//ch
-		
-		question = request.getParameter("question");
-		user1 = (User)session.getAttribute("user");		//ch
-		System.out.println(user1);
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+		question = (String) request.getParameter("question");
 		DBHandler dbHandler = new DBHandler();
-		dbHandler.addQuestion(question, user1.getName());	//ch - ändrat lite
+		dbHandler.addQuestion(question, (String) request.getParameter("user"));
 		
-		response.sendRedirect("/ProjectMissInformation/mainbox.html");
+		response.sendRedirect("/ProjectMissInformation/mainbox.jsp");
 	}
 
 }
