@@ -9,15 +9,15 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@Table(name="QUESTIONS", schema ="MISSAPP")
+@Table(name="QUESTIONS", schema="MISSAPP")
 @NamedQuery(name="Question.findAll", query="SELECT q FROM Question q")
 public class Question implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@SequenceGenerator(name="seqGen", allocationSize=1)
+//	@SequenceGenerator(name="seqGen", allocationSize=1, initialValue=1)
+//	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seqGen")
 	@Id 
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seqGen")
-	private double ticketid;
+	private int ticketid;
 
 	private String answer;
 
@@ -32,7 +32,7 @@ public class Question implements Serializable {
 		return this.ticketid;
 	}
 
-	public void setTicketid(double ticketid) {
+	public void setTicketid(int ticketid) {
 		this.ticketid = ticketid;
 	}
 
