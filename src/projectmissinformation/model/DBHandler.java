@@ -75,5 +75,29 @@ private static final String PERSISTENCE_UNIT_NAME = "ProjectMissInformation";
 		em.getTransaction().commit();
 		em.close();
 	}
+	
+	/**
+	 * @author Axel
+	 * @param u The user calling the method
+	 * @return The list of questions returned depending on admin state
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Question> listQuestions(User u) {
+		
+		EntityManager em = factory.createEntityManager();
+		List<Question> questionList = null;
+		Query q = null;
+		
+		switch (u.getAdmin()) {
+		case 0:
+			q = em.createQuery("SELECT q FROM Question as q where q.name = " +u.getName());
+			break;
+		case 1:
+			q = em.createQuery("SELECT q FROM Question as q where q.answer is null");
+			break;
+		}
+		questionList = q.getResultList();
+		return questionList;
+	}
 
 }
