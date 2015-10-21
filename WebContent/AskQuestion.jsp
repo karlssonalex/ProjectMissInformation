@@ -5,6 +5,7 @@
 
 <head>
 <link href="css/misslayout.css" rel="stylesheet" type="text/css">
+
 </head>
 
 <title>Ask for Advice</title>
@@ -32,7 +33,7 @@
 			<tr>
 				<td><p>Got a problem? We'll help you out!</p></td>
 			<tr>
-				<td><textarea cols="60" rows="10" name="question">Ask yo damn question!</textarea></td>
+				<td><textarea cols="60" rows="10" name="question" onfocus="if(this.value==this.defaultValue)this.value=''" onblur="if(this.value=='')this.value=this.defaultValue">Ask yo damn question!</textarea></td>
 			</tr>
 
 			<tr>
