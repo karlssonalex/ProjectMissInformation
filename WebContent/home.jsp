@@ -36,7 +36,7 @@
 			<li><a href="mainbox.jsp" target="main">Home</a></li>
 			<li><a href="askquestion.jsp" target="main">Ask for Advice</a></li>
 			<li><a href="qoa.jsp" target="main">Q&A</a></li>
-			<li><a href="mainbox.jsp" target="main">Contact</a></li>
+			<li><a href="contact.jsp" target="main">Contact</a></li>
 			<form action="LoginServlet" name="logoutform" method="get">
 				<input type="hidden" name="logout">
 				<li><a href="#" onclick="document.forms['logoutform'].submit(); return false;">
