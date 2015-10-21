@@ -27,7 +27,7 @@ public class Question implements Serializable {
 
 	public Question() {
 	}
-
+	
 	public double getTicketid() {
 		return this.ticketid;
 	}

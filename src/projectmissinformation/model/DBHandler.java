@@ -5,6 +5,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -65,17 +66,29 @@ public class DBHandler {
 			throws UnsupportedEncodingException, NoSuchAlgorithmException {
 		EntityManager em = factory.createEntityManager();
 		User tempUser = new User();
+		String salt = makeSalt();
+		
 		em.getTransaction().begin();
-
 		tempUser.setName(username);
-		tempUser.setPassword(encryptThis(password));
+		tempUser.setPassword(encryptThis(password, salt));
 		tempUser.setAdmin(0);
-
+		tempUser.setSalt(salt);
 		em.persist(tempUser);
 		em.getTransaction().commit();
 		em.close();
 
 		System.out.println(username + password);
+	}
+
+	private String makeSalt() {
+		char[] chars = "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ".toCharArray();
+		StringBuilder sb = new StringBuilder();
+		Random random = new Random();
+		for (int i = 0; i < 10; i++) {
+		    char c = chars[random.nextInt(chars.length)];
+		    sb.append(c);
+		}
+		return sb.toString();
 	}
 
 	/**
@@ -170,16 +183,18 @@ public class DBHandler {
 
 	/**
 	 * @author Axel
-	 * @param texterino
+	 * @param password
 	 * @return
 	 * @throws UnsupportedEncodingException
 	 * @throws NoSuchAlgorithmException
 	 */
-	private static String encryptThis(String texterino) {
+	private static String encryptThis(String password, String salt) {
 		StringBuffer sb = new StringBuffer();
 		try {
+			
+			String saltedpassword = password + salt;
 			byte[] bytesOfText;
-			bytesOfText = texterino.getBytes("UTF-8");
+			bytesOfText = saltedpassword.getBytes("UTF-8");
 
 			MessageDigest md;
 			md = MessageDigest.getInstance("SHA-256");
@@ -217,7 +232,7 @@ public class DBHandler {
 
 		for (User u : userList) {
 			if (u.getName().equals(username)) {
-				if (u.getPassword().equals(encryptThis(password))) {
+				if (u.getPassword().equals(encryptThis(password, u.getSalt()))) {
 					em.close();
 					return true;
 				}
