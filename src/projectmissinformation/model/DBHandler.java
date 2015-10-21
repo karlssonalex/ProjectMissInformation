@@ -138,12 +138,12 @@ public class DBHandler {
 	public List<Question> listQuestions(User u) {
 
 		EntityManager em = factory.createEntityManager();
-		List<Question> questionList = null;
+		List<Question> questionList;
 		Query q = null;
 
 		switch (u.getAdmin()) {
 		case 0:
-			q = em.createQuery("SELECT q FROM Question as q where q.name = " + u.getName());
+			q = em.createQuery("SELECT q FROM Question q");
 			break;
 		case 1:
 			q = em.createQuery("SELECT q FROM Question as q where q.answer is null");
