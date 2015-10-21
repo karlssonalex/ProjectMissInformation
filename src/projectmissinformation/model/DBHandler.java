@@ -1,5 +1,8 @@
 package projectmissinformation.model;
 
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,13 +12,13 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 public class DBHandler {
-	
-private static final String PERSISTENCE_UNIT_NAME = "ProjectMissInformation";
-	
+
+	private static final String PERSISTENCE_UNIT_NAME = "ProjectMissInformation";
+
 	private EntityManagerFactory factory;
-	
+
 	private List<User> userList;
-	
+
 	/***
 	 * @author Charlotte
 	 */
@@ -23,7 +26,7 @@ private static final String PERSISTENCE_UNIT_NAME = "ProjectMissInformation";
 		factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 		userList = new ArrayList<User>();
 	}
-	
+
 	/***
 	 * @author Charlotte
 	 * @return
@@ -33,105 +36,109 @@ private static final String PERSISTENCE_UNIT_NAME = "ProjectMissInformation";
 		Query q = em.createQuery("SELECT u FROM User u");
 		userList = q.getResultList();
 		em.close();
-		
+
 		return userList;
 	}
-	
+
 	/***
-	 * @author Charlotte
-	 * Get specific user
+	 * @author Charlotte Get specific user
 	 * @param name
 	 * @return
 	 */
 	public User getUser(String name) {
-		
+
 		List<User> userList = getUsers();
-		for(User u : userList) {
-			if(u.equals(name)) {
+		for (User u : userList) {
+			if (u.equals(name)) {
 				return u;
 			}
 		}
 		return new User();
 	}
-	
+
 	/***
 	 * @author Charlotte
+	 * @throws NoSuchAlgorithmException
+	 * @throws UnsupportedEncodingException
 	 */
-	public void createUser(String username, String password) {
+	public void createUser(String username, String password)
+			throws UnsupportedEncodingException, NoSuchAlgorithmException {
 		EntityManager em = factory.createEntityManager();
 		User tempUser = new User();
 		em.getTransaction().begin();
-		
+
 		tempUser.setName(username);
-		tempUser.setPassword(password);
+		tempUser.setPassword(encryptThis(password));
 		tempUser.setAdmin(0);
-		
+
 		em.persist(tempUser);
-		em.getTransaction().commit();	
+		em.getTransaction().commit();
 		em.close();
-		
+
 		System.out.println(username + password);
 	}
-	
+
 	/**
 	 * @author Axel
-	 * @param question The question asked by the user
-	 * @param user The name of the user asking the question
+	 * @param question
+	 *            The question asked by the user
+	 * @param user
+	 *            The name of the user asking the question
 	 */
 	public void addQuestion(String question_, String user_) {
 		Question question = new Question();
 		question.setQuestion(question_);
 		question.setName(user_);
-		question.setTicketid(createQuestionID()); //Alex
-		
+		question.setTicketid(createQuestionID()); // Alex
+
 		EntityManager em = factory.createEntityManager();
-		
+
 		em.getTransaction().begin();
 		em.persist(question);
 		em.getTransaction().commit();
 		em.close();
 	}
-	
+
 	/**
 	 * @author Alex
 	 * @return The ticket id
 	 */
-	public Integer createQuestionID(){
+	public Integer createQuestionID() {
 		factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 		EntityManager em = factory.createEntityManager();
-		return (Integer) em.createQuery("select max(q.ticketid) from Question q").getSingleResult()+1;
+		return (Integer) em.createQuery("select max(q.ticketid) from Question q").getSingleResult() + 1;
 	}
-	
-	public boolean userExists(String username){
+
+	public boolean userExists(String username) {
 		factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 		EntityManager em = factory.createEntityManager();
 		Query q = em.createQuery("SELECT u FROM User u");
 		List<User> userList = q.getResultList();
-		
-		for(User u : userList){
-			if(username.equals(u.getName())){
+
+		for (User u : userList) {
+			if (username.equals(u.getName())) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	
 	/**
 	 * @author Axel
-	 * @param u The user calling the method
+	 * @param u
+	 *            The user calling the method
 	 * @return The list of questions returned depending on admin state
 	 */
 	@SuppressWarnings("unchecked")
 	public List<Question> listQuestions(User u) {
-		
+
 		EntityManager em = factory.createEntityManager();
 		List<Question> questionList = null;
 		Query q = null;
-		
+
 		switch (u.getAdmin()) {
 		case 0:
-			q = em.createQuery("SELECT q FROM Question as q where q.name = " +u.getName());
+			q = em.createQuery("SELECT q FROM Question as q where q.name = " + u.getName());
 			break;
 		case 1:
 			q = em.createQuery("SELECT q FROM Question as q where q.answer is null");
@@ -140,20 +147,79 @@ private static final String PERSISTENCE_UNIT_NAME = "ProjectMissInformation";
 		questionList = q.getResultList();
 		return questionList;
 	}
-	
+
 	/**
 	 * @author Axel
 	 * @param ticketId
 	 * @param answer
 	 */
 	public void answerQuestion(int ticketId, String answer) {
-		
+
 		EntityManager em = factory.createEntityManager();
 		Question updatedQ = em.find(Question.class, ticketId);
-		
+
 		em.getTransaction().begin();
 		updatedQ.setAnswer(answer);
 		em.getTransaction().commit();
 	}
 
+	/**
+	 * @author Axel
+	 * @param texterino
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 * @throws NoSuchAlgorithmException
+	 */
+	private static String encryptThis(String texterino) {
+		StringBuffer sb = new StringBuffer();
+		try {
+			byte[] bytesOfText;
+			bytesOfText = texterino.getBytes("UTF-8");
+
+			MessageDigest md;
+			md = MessageDigest.getInstance("SHA-256");
+			byte[] theDigest = md.digest(bytesOfText);
+
+
+			for (int i = 0; i < theDigest.length; i++) {
+				sb.append(Integer.toHexString((theDigest[i] & 0xFF) | 0x100).substring(1, 3));
+			}
+		} catch (UnsupportedEncodingException | NoSuchAlgorithmException e) {
+			e.printStackTrace();
+			System.out.println("Failed to encrypt ggwp");
+		}
+		return sb.toString();
+	}
+
+	/**
+	 * Check login.
+	 *
+	 * @param username
+	 *            the username
+	 * @param password
+	 *            the password
+	 * @return true, if successful
+	 * @throws NoSuchAlgorithmException
+	 * @throws UnsupportedEncodingException
+	 */
+	@SuppressWarnings("unchecked")
+	public boolean checkLogin(String username, String password)
+			throws UnsupportedEncodingException, NoSuchAlgorithmException {
+		factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+		EntityManager em = factory.createEntityManager();
+		Query q = em.createQuery("SELECT u FROM User u");
+		List<User> userList = q.getResultList();
+
+		for (User u : userList) {
+			if (u.getName().equals(username)) {
+				if (u.getPassword().equals(encryptThis(password))) {
+					em.close();
+					return true;
+				}
+			}
+		}
+
+		em.close();
+		return false;
+	}
 }

@@ -1,6 +1,7 @@
 package projectmissinformation.controller;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -90,42 +91,18 @@ public class LoginServlet extends HttpServlet {
 		String username = (String) request.getParameter("user");
 		String password = (String) request.getParameter("password");
 
-		if (checkLogin(username, password)) {	
-			Cookie loginCookie = new Cookie("user", username);
-			loginCookie.setMaxAge(30 * 60);
-			response.addCookie(loginCookie);
-			response.sendRedirect("/ProjectMissInformation/home.jsp");
-		} else {
-			response.sendRedirect("/ProjectMissInformation/login.jsp");
-		}
-	}
-
-	/**
-	 * Check login.
-	 *
-	 * @param username
-	 *            the username
-	 * @param password
-	 *            the password
-	 * @return true, if successful
-	 */
-	@SuppressWarnings("unchecked")
-	private boolean checkLogin(String username, String password) {
-		factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
-		EntityManager em = factory.createEntityManager();
-		Query q = em.createQuery("SELECT u FROM User u");
-		List<User> userList = q.getResultList();
-		
-		for(User u : userList){
-			if (u.getName().equals(username)) {
-				if (u.getPassword().equals(password)) {
-					em.close();
-					return true;
-				}
+		DBHandler dbHandler = new DBHandler();
+		try {
+			if (dbHandler.checkLogin(username, password)) {	
+				Cookie loginCookie = new Cookie("user", username);
+				loginCookie.setMaxAge(30 * 60);
+				response.addCookie(loginCookie);
+				response.sendRedirect("/ProjectMissInformation/home.jsp");
+			} else {
+				response.sendRedirect("/ProjectMissInformation/login.jsp");
 			}
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
 		}
-
-		em.close();
-		return false;
 	}
 }

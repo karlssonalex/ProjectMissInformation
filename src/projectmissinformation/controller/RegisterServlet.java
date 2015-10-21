@@ -1,6 +1,7 @@
 package projectmissinformation.controller;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -50,7 +51,11 @@ import projectmissinformation.model.DBHandler;
 			String password = request.getParameter("password");
 			
 			if(!dbH.userExists(username)){
-				dbH.createUser(username, password);
+				try {
+					dbH.createUser(username, password);
+				} catch (NoSuchAlgorithmException e) {
+					e.printStackTrace();
+				}
 				getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
 			}
 			else{
