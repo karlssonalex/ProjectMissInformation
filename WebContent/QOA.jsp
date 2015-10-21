@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,6 +8,22 @@
 <title>QOA</title>
 </head>
 <body>
-<p>Shit worked!</p>
+	<table id="t01">
+		<tr>
+			<th>Ticket ID</th>
+			<th>Question</th>
+			<th>Answer</th>
+			<th>Name</th>
+		</tr>
+		<c:forEach var="question" items="${betlist}" varStatus="counter">
+			<tr>
+				<td>${question.getTicketid}</td>
+				<td>${question.getQuestion}</td>
+				<td>${question.getAnswer}</td>
+				<td>${question.getName}</td>
+			</tr>
+
+		</c:forEach>
+	</table>
 </body>
 </html>

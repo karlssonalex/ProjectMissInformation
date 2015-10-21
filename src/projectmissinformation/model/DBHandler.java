@@ -108,7 +108,6 @@ public class DBHandler {
 		EntityManager em = factory.createEntityManager();
 		return (Integer) em.createQuery("select max(q.ticketid) from Question q").getSingleResult() + 1;
 	}
-<<<<<<< HEAD
 
 	
 	/**
