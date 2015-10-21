@@ -108,8 +108,14 @@ public class DBHandler {
 		EntityManager em = factory.createEntityManager();
 		return (Integer) em.createQuery("select max(q.ticketid) from Question q").getSingleResult() + 1;
 	}
+<<<<<<< HEAD
 
-	public boolean userExists(String username) {
+	
+	/**
+	 * @author Alex
+	 * @return The boolean is true if user exists, otherwise false.
+	 */
+	public boolean userExists(String username){
 		factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 		EntityManager em = factory.createEntityManager();
 		Query q = em.createQuery("SELECT u FROM User u");
