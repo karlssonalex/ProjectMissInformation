@@ -84,7 +84,6 @@ public class DBHandler {
 		StringBuilder sb = new StringBuilder();
 		Random random = new Random();
 		for (int i = 0; i < 10; i++) {
-		    sb.append(c);
 			char c = chars[random.nextInt(chars.length)];
 			sb.append(c);
 		}
