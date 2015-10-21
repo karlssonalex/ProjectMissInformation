@@ -12,7 +12,7 @@ import projectmissinformation.model.DBHandler;
 
 /***
  * 
- * @author Charlotte
+ * @author Alex
  *
  */
 	/**
@@ -35,8 +35,6 @@ import projectmissinformation.model.DBHandler;
 		 */
 		protected void doGet(HttpServletRequest request, HttpServletResponse response)
 				throws ServletException, IOException {
-	
-			response.getWriter().append("Served at: ").append(request.getContextPath());
 		}
 	
 		/**
@@ -46,14 +44,19 @@ import projectmissinformation.model.DBHandler;
 		protected void doPost(HttpServletRequest request, HttpServletResponse response)
 				throws ServletException, IOException {
 			
-			DBHandler dbH = new DBHandler();			
+			DBHandler dbH = new DBHandler();	
 			
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
 			
-			dbH.createUser(username, password);
-	
-			getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
+			if(!dbH.userExists(username)){
+				dbH.createUser(username, password);
+				getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
+			}
+			else{
+				request.setAttribute("duplicatename", "Username is already taken!");
+				getServletContext().getRequestDispatcher("/registration.jsp").forward(request, response);
+			}
 	
 		}
 	}

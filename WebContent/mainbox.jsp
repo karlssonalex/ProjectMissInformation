@@ -7,7 +7,7 @@
 <link href="css/misslayout.css" rel="stylesheet" type="text/css">
 </head>
 
-<title>Ask for Advice</title>
+<title>Herrow</title>
 
 <body>
 	<%
@@ -26,21 +26,14 @@
 			response.sendRedirect("login.jsp");
 		}
 	%>
-	<form action="AskServlet" name="form" method="post">
-		<input type="hidden" value="${user}" name="user" />
-		<table>
-			<tr>
-				<td><p>Got a problem? We'll help you out!</p></td>
-			<tr>
-				<td><textarea cols="60" rows="10" name="question">Ask yo damn question!</textarea></td>
-			</tr>
 
-			<tr>
-				<td><button type="submit" value="Submit">SUBMIT</button>
-					<button type="reset" value="Reset">RESET</button></td>
-			</tr>
-		</table>
-	</form>
+	<center>
+		<p>You're logged in as: ${user}</p>
+	</center>
+	
+	<br>
+	
+	<img src="http://i.imgur.com/FcgG2S2.gif" width="890"height="500" alt="csgologo" />
 </body>
 
 </html>

@@ -7,6 +7,21 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link href="css/misslayout.css" rel="stylesheet" type="text/css" />
 <title>Registration</title>
+
+<script type="text/javascript">
+function checkField(form) {
+    if (form.username.value == "") {
+        alert("Field 'Username' is empty");
+        return false;
+    }
+    else if (form.password.value == "") {
+        alert("Field 'Password' is empty");
+        return false;
+    }
+    return true;
+}
+</script>
+
 </head>
 <body>
 <center>
@@ -14,7 +29,7 @@
 			<tr>
 				<td>
 					<div class="divbox">
-						<form action="RegisterServlet" name="form" method="post">
+						<form action="RegisterServlet" name="form" method="post" onsubmit="return checkField(this)">
 
 							<center>
 								<h1>REGISTRATION</h1>

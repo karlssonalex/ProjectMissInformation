@@ -8,11 +8,6 @@
 <title>Login</title>
 
 <script type="text/javascript">
-function checks(form){
-	checkCookie();
-	checkField(form);
-}
-
 function checkCookie() {
     var cookieEnabled = (navigator.cookieEnabled) ? true : false;
     if (typeof navigator.cookieEnabled == "undefined" && !cookieEnabled){ 
@@ -25,23 +20,10 @@ function checkCookie() {
 function showCookieFail() {
 	alert("You have to enable cookies to use this site!");
 }
-
-function checkField(form) {
-    if (form.user.value == "") {
-        alert("Field 'Username' is empty");
-        return false;
-    }
-    else if (form.pwrd.value == "") {
-        alert("Field 'Password' is empty");
-        return false;
-    }
-    return true;
-}
-
 </script>
 </head>
 <body>
-	<form name="login" action="LoginServlet" method="post" onsubmit="checks(this)">
+	<form name="login" action="LoginServlet" method="post" onsubmit="checkCookie()">
 	<center><h1>LOGIN</h1></center>
 		<table>
 	<tr>

@@ -81,7 +81,8 @@ private static final String PERSISTENCE_UNIT_NAME = "ProjectMissInformation";
 	public void addQuestion(String question_, String user_) {
 		Question question = new Question();
 		question.setQuestion(question_);
-		question.setName(user_);			//bytte från setAnswer till setName
+		question.setName(user_);
+		question.setTicketid(createQuestionID()); //Alex
 		
 		EntityManager em = factory.createEntityManager();
 		
@@ -89,6 +90,30 @@ private static final String PERSISTENCE_UNIT_NAME = "ProjectMissInformation";
 		em.persist(question);
 		em.getTransaction().commit();
 		em.close();
+	}
+	
+	/**
+	 * @author Alex
+	 * @return The ticket id
+	 */
+	public Integer createQuestionID(){
+		factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+		EntityManager em = factory.createEntityManager();
+		return (Integer) em.createQuery("select max(q.ticketid) from Question q").getSingleResult()+1;
+	}
+	
+	public boolean userExists(String username){
+		factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+		EntityManager em = factory.createEntityManager();
+		Query q = em.createQuery("SELECT u FROM User u");
+		List<User> userList = q.getResultList();
+		
+		for(User u : userList){
+			if(username.equals(u.getName())){
+				return true;
+			}
+		}
+		return false;
 	}
 
 	

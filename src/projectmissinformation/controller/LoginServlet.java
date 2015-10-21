@@ -20,6 +20,7 @@ import projectmissinformation.model.User;
 
 /**
  * Servlet implementation class Login.
+ * @author Alex
  */
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
@@ -86,17 +87,10 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession session = request.getSession();					//ch
-		DBHandler dbh = new DBHandler();
-		
 		String username = (String) request.getParameter("user");
 		String password = (String) request.getParameter("password");
 
-		if (checkLogin(username, password)) {
-			
-			System.out.println("user" + dbh.getUser(username));		//ch
-			session.setAttribute("user", dbh.getUser(username));	//ch
-			
+		if (checkLogin(username, password)) {	
 			Cookie loginCookie = new Cookie("user", username);
 			loginCookie.setMaxAge(30 * 60);
 			response.addCookie(loginCookie);
