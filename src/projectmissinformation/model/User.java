@@ -22,10 +22,19 @@ public class User implements Serializable {
 	private int admin;
 
 	private String password;
+	
+	private String salt;
 
 	public User() {
 	}
+	
+	public String getSalt() {
+		return salt;
+	}
 
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
 	
 	public String getName() {
 		return this.name;
