@@ -32,6 +32,7 @@ public class DBHandler {
 	 * @author Charlotte
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public List<User> getUsers() {
 		EntityManager em = factory.createEntityManager();
 		Query q = em.createQuery("SELECT u FROM User u");
@@ -156,10 +157,11 @@ public class DBHandler {
 
 		switch (u.getAdmin()) {
 		case 0:
-			q = em.createQuery("SELECT q FROM Question q");
+			q = em.createQuery("SELECT q FROM Question as q where q.name like :name");
+			q.setParameter("name", u.getName());
 			break;
 		case 1:
-			q = em.createQuery("SELECT q FROM Question as q where q.answer is null");
+			q = em.createQuery("SELECT q FROM Question as q where q.answer like ''");
 			break;
 		}
 		questionList = q.getResultList();

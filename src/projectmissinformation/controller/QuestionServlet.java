@@ -22,8 +22,6 @@ import projectmissinformation.model.User;
 @WebServlet("/QuestionServlet")
 public class QuestionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	private String name;
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
