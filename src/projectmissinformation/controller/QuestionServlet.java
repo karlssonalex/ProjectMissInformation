@@ -39,7 +39,7 @@ public class QuestionServlet extends HttpServlet {
 					List<Question> questionList = dbHandler.listQuestions(u);
 					request.setAttribute("questionList", questionList);
 					request.setAttribute("adminStatus", u.getAdmin());
-					RequestDispatcher rd = request.getRequestDispatcher("/ProjectMissInformation/qoa.jsp");
+					RequestDispatcher rd = request.getRequestDispatcher("qoa.jsp");
 					rd.forward(request, response);
 				}
 			}
