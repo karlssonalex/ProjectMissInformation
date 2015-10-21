@@ -50,6 +50,9 @@ import projectmissinformation.model.DBHandler;
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
 			
+			//dbH.validateInput(username);
+			//dbH.validateInput(password);
+			
 			if(!dbH.userExists(username)){
 				try {
 					dbH.createUser(username, password);

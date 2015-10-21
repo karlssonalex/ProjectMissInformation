@@ -67,7 +67,7 @@ public class DBHandler {
 		EntityManager em = factory.createEntityManager();
 		User tempUser = new User();
 		String salt = makeSalt();
-		
+
 		em.getTransaction().begin();
 		tempUser.setName(username);
 		tempUser.setPassword(encryptThis(password, salt));
@@ -76,8 +76,6 @@ public class DBHandler {
 		em.persist(tempUser);
 		em.getTransaction().commit();
 		em.close();
-
-		System.out.println(username + password);
 	}
 
 	private String makeSalt() {
@@ -85,8 +83,8 @@ public class DBHandler {
 		StringBuilder sb = new StringBuilder();
 		Random random = new Random();
 		for (int i = 0; i < 10; i++) {
-		    char c = chars[random.nextInt(chars.length)];
-		    sb.append(c);
+			char c = chars[random.nextInt(chars.length)];
+			sb.append(c);
 		}
 		return sb.toString();
 	}
@@ -112,6 +110,24 @@ public class DBHandler {
 		em.close();
 	}
 
+	public boolean validateInput(String input) {
+		String allowedChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890@_.";
+		if (input == null || input.equals("")) {
+			return false;
+		}
+
+		boolean pass = true;
+		char[] inputToCharArray = input.toCharArray();
+
+		for (char character : inputToCharArray) {
+			if (allowedChars.indexOf(character) == -1) {
+				pass = false;
+				break;
+			}
+		}
+		return pass;
+	}
+
 	/**
 	 * @author Alex
 	 * @return The ticket id
@@ -122,12 +138,11 @@ public class DBHandler {
 		return (Integer) em.createQuery("select max(q.ticketid) from Question q").getSingleResult() + 1;
 	}
 
-	
 	/**
 	 * @author Alex
 	 * @return The boolean is true if user exists, otherwise false.
 	 */
-	public boolean userExists(String username){
+	public boolean userExists(String username) {
 		factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 		EntityManager em = factory.createEntityManager();
 		Query q = em.createQuery("SELECT u FROM User u");
@@ -191,7 +206,7 @@ public class DBHandler {
 	private static String encryptThis(String password, String salt) {
 		StringBuffer sb = new StringBuffer();
 		try {
-			
+
 			String saltedpassword = password + salt;
 			byte[] bytesOfText;
 			bytesOfText = saltedpassword.getBytes("UTF-8");
@@ -199,7 +214,6 @@ public class DBHandler {
 			MessageDigest md;
 			md = MessageDigest.getInstance("SHA-256");
 			byte[] theDigest = md.digest(bytesOfText);
-
 
 			for (int i = 0; i < theDigest.length; i++) {
 				sb.append(Integer.toHexString((theDigest[i] & 0xFF) | 0x100).substring(1, 3));
