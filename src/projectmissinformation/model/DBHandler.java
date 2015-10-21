@@ -140,5 +140,20 @@ private static final String PERSISTENCE_UNIT_NAME = "ProjectMissInformation";
 		questionList = q.getResultList();
 		return questionList;
 	}
+	
+	/**
+	 * @author Axel
+	 * @param ticketId
+	 * @param answer
+	 */
+	public void answerQuestion(int ticketId, String answer) {
+		
+		EntityManager em = factory.createEntityManager();
+		Question updatedQ = em.find(Question.class, ticketId);
+		
+		em.getTransaction().begin();
+		updatedQ.setAnswer(answer);
+		em.getTransaction().commit();
+	}
 
 }
