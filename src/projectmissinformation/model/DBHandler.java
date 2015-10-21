@@ -102,6 +102,10 @@ private static final String PERSISTENCE_UNIT_NAME = "ProjectMissInformation";
 		return (Integer) em.createQuery("select max(q.ticketid) from Question q").getSingleResult()+1;
 	}
 	
+	/**
+	 * @author Alex
+	 * @return The boolean is true if user exists, otherwise false.
+	 */
 	public boolean userExists(String username){
 		factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 		EntityManager em = factory.createEntityManager();
