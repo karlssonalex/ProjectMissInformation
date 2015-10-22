@@ -33,7 +33,7 @@ function showCookieFail() {
 		<td>Password: <input type="password" name="password"></td>
 		</tr>
 		<tr>
-		<td><button type="submit" value="Submit">SUBMIT</button>
+		<td><button type="submit" value="Submit">LOGIN</button>
 		<button type="reset" value="Reset">RESET</button></td>	
 		</tr>
 		<tr>

@@ -7,7 +7,7 @@
 <link href="css/misslayout.css" rel="stylesheet" type="text/css">
 </head>
 
-<title>Herrow</title>
+<title>Index</title>
 
 <body>
 	<%
