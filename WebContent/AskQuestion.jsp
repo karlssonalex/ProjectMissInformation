@@ -29,7 +29,7 @@
 		}
 	%>
 	<form action="AskServlet" name="form" method="post">
-		<input type="hidden" value="${user}" name="user" />
+		<input type="hidden" value="${username}" name="username" />
 		<table>
 			<tr>
 				<td><p>Got a problem? We'll help you out!</p></td>

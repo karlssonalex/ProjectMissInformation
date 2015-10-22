@@ -33,11 +33,10 @@ public class QuestionServlet extends HttpServlet {
 		if (Cookies != null) {
 			for (Cookie c : Cookies) {
 				if (c.getName().equals("username")) {
-					User u = dbHandler.getUser(c.getName());
+					User u = dbHandler.getUser(c.getValue());
 					List<Question> questionList = dbHandler.listQuestions(u);
 					request.setAttribute("questionList", questionList);
 					request.setAttribute("adminStatus", u.getAdmin());
-					System.out.println(questionList.size());
 					RequestDispatcher rd = request.getRequestDispatcher("qoa.jsp");
 					rd.forward(request, response);
 				}

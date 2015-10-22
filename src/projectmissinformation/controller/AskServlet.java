@@ -22,7 +22,7 @@ import projectmissinformation.model.User;
 public class AskServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
-	private String question, user;
+	private String question;
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -30,9 +30,9 @@ public class AskServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		question = (String) request.getParameter("question");
 		DBHandler dbHandler = new DBHandler();
-		dbHandler.addQuestion(question, (String) request.getParameter("user"));
+		dbHandler.addQuestion(question, (String) request.getParameter("username"));
 		
-		response.sendRedirect("/ProjectMissInformation/mainbox.jsp");
+		response.sendRedirect("/ProjectMissInformation/QuestionServlet");
 	}
 
 }

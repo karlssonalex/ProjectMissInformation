@@ -51,7 +51,7 @@ public class DBHandler {
 
 		List<User> userList = getUsers();
 		for (User u : userList) {
-			if (u.equals(name)) {
+			if (u.getName().equals(name)) {
 				return u;
 			}
 		}
@@ -182,14 +182,15 @@ public class DBHandler {
 
 		switch (u.getAdmin()) {
 		case 0:
-			q = em.createQuery("SELECT q FROM Question as q where q.name like :name");
-			q.setParameter("name", u.getName());
+			q = em.createQuery("SELECT q FROM Question as q where q.name like :username");
+			q.setParameter("username", u.getName());
 			break;
 		case 1:
-			q = em.createNamedQuery("Question.findUnanswered", Question.class);
+			q = em.createQuery("SELECT q FROM Question as q where q.answer IS NULL");
 			break;
 		}
 		questionList = q.getResultList();
+		em.close();
 		return questionList;
 	}
 
