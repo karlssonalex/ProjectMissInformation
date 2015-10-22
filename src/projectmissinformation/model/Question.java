@@ -10,7 +10,10 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="QUESTIONS", schema="MISSAPP")
-@NamedQuery(name="Question.findAll", query="SELECT q FROM Question q")
+@NamedQueries({
+	@NamedQuery(name="Question.findUnanswered", query="SELECT q FROM Question as q where q.answer IS NULL"),
+	@NamedQuery(name="Question.findAll", query="SELECT q FROM Question q")	
+})
 public class Question implements Serializable {
 	private static final long serialVersionUID = 1L;
 

@@ -79,6 +79,10 @@ public class DBHandler {
 		em.close();
 	}
 
+	/**
+	 * @auth Axel
+	 * @return
+	 */
 	private String makeSalt() {
 		char[] chars = "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ".toCharArray();
 		StringBuilder sb = new StringBuilder();
@@ -110,7 +114,13 @@ public class DBHandler {
 		em.getTransaction().commit();
 		em.close();
 	}
+	
 
+	/**
+	 * @auth
+	 * @param input
+	 * @return
+	 */
 	public boolean validateInput(String input) {
 		String allowedChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890@_.";
 		if (input == null || input.equals("")) {
@@ -176,7 +186,7 @@ public class DBHandler {
 			q.setParameter("name", u.getName());
 			break;
 		case 1:
-			q = em.createQuery("SELECT q FROM Question as q where q.answer like ''");
+			q = em.createNamedQuery("Question.findUnanswered", Question.class);
 			break;
 		}
 		questionList = q.getResultList();

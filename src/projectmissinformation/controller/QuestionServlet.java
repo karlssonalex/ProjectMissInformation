@@ -32,7 +32,7 @@ public class QuestionServlet extends HttpServlet {
 		Cookie[] Cookies = request.getCookies();
 		if (Cookies != null) {
 			for (Cookie c : Cookies) {
-				if (c.getName().equals("user")) {
+				if (c.getName().equals("username")) {
 					User u = dbHandler.getUser(c.getName());
 					List<Question> questionList = dbHandler.listQuestions(u);
 					request.setAttribute("questionList", questionList);
