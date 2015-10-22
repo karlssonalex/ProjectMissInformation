@@ -14,7 +14,7 @@ import projectmissinformation.model.DBHandler;
 
 	/**
 	 * Servlet implementation class RegisterServlet
-	 * @author Charlotte
+	 * @author Charlotte & Alex
 	 */
 	@WebServlet("/RegisterServlet")
 	public class RegisterServlet extends HttpServlet {
@@ -53,21 +53,22 @@ import projectmissinformation.model.DBHandler;
 			request.setAttribute("user", username);
 			request.setAttribute("password", password);
 			
-			//dbH.validateInput(username);
-			//dbH.validateInput(password);
-			
-			if(!dbH.userExists(username)){
-				try {
-					dbH.createUser(username, password);
-				} catch (NoSuchAlgorithmException e) {
-					e.printStackTrace();
+			if(dbH.validateInput(username) && dbH.validateInput(password)){
+				if(!dbH.userExists(username)){
+					try {
+						dbH.createUser(username, password, 0);
+					} catch (NoSuchAlgorithmException e) {
+						e.printStackTrace();
+					}
+					getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
 				}
-				getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
+				else{
+					request.setAttribute("error", "Username is already taken!");
+				}
 			}
 			else{
-				request.setAttribute("duplicatename", "Username is already taken!");
-				getServletContext().getRequestDispatcher("/registration.jsp").forward(request, response);
+				request.setAttribute("error", "The characters you entered are not allowed!");
 			}
-	
+			getServletContext().getRequestDispatcher("/registration.jsp").forward(request, response);
 		}
 	}

@@ -5,7 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <html>
-<!-- @Autor: Alex -->
+<!-- @Author: Alex -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link href="css/misslayout.css" rel="stylesheet" type="text/css">
@@ -23,10 +23,17 @@
 			<tr>
 				<td>${question.getTicketid()}</td>
 				<td>${question.getQuestion()}</td>
-				<td>${question.getAnswer()}</td>
+				<c:if test="${empty question.getAnswer()}">
+					<td> <form action="AnswerServlet" name="form" method="post">
+						<input type="hidden" value="${question.getTicketid()}" name="ticketid" />
+    					<input type="text" name="answer" id="answer">
+					</form> </td>
+				</c:if>
+				<c:if test="${not empty question.getAnswer()}">
+					<td> ${question.getAnswer()}</td>
+				</c:if>
 				<td>${question.getName()}</td>
 			</tr>
-
 		</c:forEach>
 	</table>
 </body>

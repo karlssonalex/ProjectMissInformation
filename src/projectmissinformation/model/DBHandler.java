@@ -63,7 +63,7 @@ public class DBHandler {
 	 * @throws NoSuchAlgorithmException
 	 * @throws UnsupportedEncodingException
 	 */
-	public void createUser(String username, String password)
+	public void createUser(String username, String password, int admin)
 			throws UnsupportedEncodingException, NoSuchAlgorithmException {
 		EntityManager em = factory.createEntityManager();
 		User tempUser = new User();
@@ -72,7 +72,7 @@ public class DBHandler {
 		em.getTransaction().begin();
 		tempUser.setName(username);
 		tempUser.setPassword(encryptThis(password, salt));
-		tempUser.setAdmin(0);
+		tempUser.setAdmin(admin);
 		tempUser.setSalt(salt);
 		em.persist(tempUser);
 		em.getTransaction().commit();
@@ -240,7 +240,7 @@ public class DBHandler {
 
 	/**
 	 * Check login.
-	 *
+	 * @author Alex
 	 * @param username
 	 *            the username
 	 * @param password

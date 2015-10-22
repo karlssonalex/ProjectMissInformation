@@ -72,7 +72,7 @@ padding: 5px;
 
 .navbar li {
 	height: auto;
-	width: 180px; /* Each menu item is 150px wide */
+	width: 150px; /* Each menu item is 150px wide */
 	float: left; /* This lines up the menu items horizontally */
 	text-align: center; /* All text is placed in the center of the box */
 	list-style: none;
