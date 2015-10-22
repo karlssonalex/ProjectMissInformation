@@ -8,16 +8,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import projectmissinformation.model.DBHandler;
 
-/***
- * 
- * @author Alex
- *
- */
 	/**
 	 * Servlet implementation class RegisterServlet
+	 * @author Charlotte
 	 */
 	@WebServlet("/RegisterServlet")
 	public class RegisterServlet extends HttpServlet {
@@ -46,9 +43,15 @@ import projectmissinformation.model.DBHandler;
 				throws ServletException, IOException {
 			
 			DBHandler dbH = new DBHandler();	
+			HttpSession session = request.getSession();
+			
+			session.setMaxInactiveInterval(10080 * 80);
 			
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
+			
+			request.setAttribute("user", username);
+			request.setAttribute("password", password);
 			
 			//dbH.validateInput(username);
 			//dbH.validateInput(password);

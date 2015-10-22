@@ -60,12 +60,23 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		HttpSession session = request.getSession();
+		if(session != null) {
+			session.invalidate();
+		}
+		
 		Cookie[] loginCookies = request.getCookies();
 		if (loginCookies != null) {
 			for (Cookie c : loginCookies) {
-				if (c.getName().equals("user")) {
+				if (c.getName().equals("username")) {
 					c.setMaxAge(0);
 					response.addCookie(c);
+					try {
+						Thread.sleep(2000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 					response.sendRedirect("/ProjectMissInformation/login.jsp");
 				}
 			}
@@ -88,15 +99,22 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String username = (String) request.getParameter("user");
-		String password = (String) request.getParameter("password");
+		
+		HttpSession session = request.getSession();
+		DBHandler dbH = new DBHandler();
+		
+		session.setMaxInactiveInterval(10080 * 60);
+		
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
 
-		DBHandler dbHandler = new DBHandler();
+		
 		try {
-			if (dbHandler.checkLogin(username, password)) {	
-				Cookie loginCookie = new Cookie("user", username);
+			if (dbH.checkLogin(username, password)) {	
+				Cookie loginCookie = new Cookie("username", username);
 				loginCookie.setMaxAge(30 * 60);
 				response.addCookie(loginCookie);
+				session.setAttribute("Authenticated", new Boolean(true));
 				response.sendRedirect("/ProjectMissInformation/home.jsp");
 			} else {
 				response.sendRedirect("/ProjectMissInformation/login.jsp");

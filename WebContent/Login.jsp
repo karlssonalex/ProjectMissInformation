@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1"
+    session = "true"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<!-- @Autor: Charlotte -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link href="css/misslayout.css" rel="stylesheet" type="text/css" />
@@ -23,11 +25,13 @@ function showCookieFail() {
 </script>
 </head>
 <body>
+
 	<form name="login" action="LoginServlet" method="post" onsubmit="checkCookie()">
 	<center><h1>LOGIN</h1></center>
+	<br>
 		<table>
 	<tr>
-		<td>Username: <input type="text" name="user"></td>
+		<td>Username: <input type="text" name="username"></td>
 		</tr>
 		<tr>
 		<td>Password: <input type="password" name="password"></td>

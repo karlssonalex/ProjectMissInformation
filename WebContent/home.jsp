@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"
+	session ="false"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <!-- @Autor: Charlotte -->
@@ -16,9 +17,9 @@
 		Cookie[] cookies = request.getCookies();
 		if (cookies != null) {
 			for (Cookie c : cookies) {
-				if (c.getName().equals("user")) {
+				if (c.getName().equals("username")) {
 					userName = c.getValue();
-					pageContext.setAttribute("user", userName);
+					pageContext.setAttribute("username", userName);
 				}
 			}
 		}
@@ -32,6 +33,7 @@
 			<h1>MISS INFORMATION</h1>
 		</center>
 		<br />
+
 		<ul class="navbar">
 			<li><a href="mainbox.jsp" target="main">Home</a></li>
 			<li><a href="askquestion.jsp" target="main">Ask for Advice</a></li>

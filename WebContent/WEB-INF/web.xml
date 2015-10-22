@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
-  <display-name>ProjectMissInformation</display-name>
-  <welcome-file-list>
-    <welcome-file>login.jsp</welcome-file>
-  </welcome-file-list>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="WebApp_ID" version="3.0">
+
+	<filter>
+	<filter-name>AccessFilter</filter-name>
+	<filter-class>projectmissinformation.model.AccessFilter</filter-class>
+	</filter>
+	<filter-mapping>
+	<filter-name>AccessFilter</filter-name>
+	<url-pattern>/home.jsp</url-pattern>
+	<url-pattern>/contact.jsp</url-pattern>
+	<url-pattern>/qoa.jsp</url-pattern>
+	<url-pattern>/askquestion.jsp</url-pattern>
+	</filter-mapping>
+
+	<display-name>ProjectMissInformation</display-name>
+	<welcome-file-list>
+		<welcome-file>welcome.jsp</welcome-file>
+	</welcome-file-list>
 </web-app>
