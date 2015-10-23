@@ -34,7 +34,6 @@ public class QuestionServlet extends HttpServlet {
 		DBHandler dbHandler = new DBHandler();
 
 		User u = dbHandler.getUser((String) session.getAttribute("username"));
-		System.out.println(session.getAttribute("username"));
 		List<Question> questionList = dbHandler.listQuestions(u);
 		request.setAttribute("questionList", questionList);
 		request.setAttribute("adminStatus", u.getAdmin());
