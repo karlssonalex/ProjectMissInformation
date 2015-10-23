@@ -35,8 +35,8 @@ public class QuestionServlet extends HttpServlet {
 
 		User u = dbHandler.getUser((String) session.getAttribute("username"));
 		List<Question> questionList = dbHandler.listQuestions(u);
-		session.setAttribute("questionList", questionList);
-		session.setAttribute("adminStatus", u.getAdmin());
+		request.setAttribute("questionList", questionList);
+		request.setAttribute("adminStatus", u.getAdmin());
 		RequestDispatcher rd = request.getRequestDispatcher("qoa.jsp");
 		rd.forward(request, response);
 	}
