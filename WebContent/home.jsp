@@ -23,13 +23,8 @@
 			<li><a href="mainbox.jsp" target="main">Home</a></li>
 			<li><a href="askquestion.jsp" target="main">Ask for Advice</a></li>
 			<li><a href="QuestionServlet" target="main">Q&A</a></li>
-<<<<<<< HEAD
 			<li><a href="payment.jsp" target="main">Contact</a></li>
 			<c:if test="${sessionScope.adminStatus == 1}">
-=======
-			<li><a href="contact.jsp" target="main">Contact</a></li>
-			<c:if test="${sessionScope.adminStatus == 2}">
->>>>>>> origin/master
 				<li><a href="adminpage.jsp" target="main">Admin</a></li>
 			</c:if>
 
