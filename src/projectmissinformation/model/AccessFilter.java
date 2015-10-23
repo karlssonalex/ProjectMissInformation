@@ -19,6 +19,8 @@ import javax.servlet.http.HttpSession;
  */
 @WebFilter("/AccessFilter")
 public class AccessFilter implements Filter {
+	
+	private String contextPath;
 
     /**
      * Default constructor. 
@@ -61,7 +63,7 @@ public class AccessFilter implements Filter {
 		
 		if((session == null) || (!authenticated)) {
 			System.out.println("Unauthorized access request");
-			res.sendRedirect("../login.jsp");
+			res.sendRedirect(contextPath + "/login.jsp");
 		}
 		else {
 			chain.doFilter(request, response);
@@ -73,5 +75,6 @@ public class AccessFilter implements Filter {
 	 */
 	public void init(FilterConfig fConfig) throws ServletException {
 
+		contextPath = fConfig.getServletContext().getContextPath();
 	}
 }

@@ -11,22 +11,6 @@
 <title>Index</title>
 
 <body>
-	<%
-		String userName = null;
-
-		Cookie[] cookies = request.getCookies();
-		if (cookies != null) {
-			for (Cookie c : cookies) {
-				if (c.getName().equals("username")) {
-					userName = c.getValue();
-					pageContext.setAttribute("username", userName);
-				}
-			}
-		}
-		if (userName == null) {
-			response.sendRedirect("login.jsp");
-		}
-	%>
 
 	<center>
 		<p>You're logged in as: ${username}</p>
@@ -34,6 +18,6 @@
 	
 	<br>
 	
-	<img src="http://i.imgur.com/FcgG2S2.gif" width="890"height="500" alt="csgologo" />
+	<img src="http://i.imgur.com/FcgG2S2.gif" width="890"height="500" alt="bajs" />
 </body>
 </html>

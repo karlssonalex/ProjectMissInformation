@@ -12,22 +12,7 @@
 <title>Ask for Advice</title>
 
 <body>
-	<%
-		String userName = null;
 
-		Cookie[] cookies = request.getCookies();
-		if (cookies != null) {
-			for (Cookie c : cookies) {
-				if (c.getName().equals("username")) {
-					userName = c.getValue();
-					pageContext.setAttribute("username", userName);
-				}
-			}
-		}
-		if (userName == null) {
-			response.sendRedirect("login.jsp");
-		}
-	%>
 	<form action="AskServlet" name="form" method="post">
 		<input type="hidden" value="${username}" name="username" />
 		<table>

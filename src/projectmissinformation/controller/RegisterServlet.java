@@ -43,15 +43,9 @@ import projectmissinformation.model.DBHandler;
 				throws ServletException, IOException {
 			
 			DBHandler dbH = new DBHandler();	
-			HttpSession session = request.getSession();
-			
-			session.setMaxInactiveInterval(10080 * 80);
 			
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
-			
-			request.setAttribute("user", username);
-			request.setAttribute("password", password);
 			
 			if(dbH.validateInput(username) && dbH.validateInput(password)){
 				if(!dbH.userExists(username)){

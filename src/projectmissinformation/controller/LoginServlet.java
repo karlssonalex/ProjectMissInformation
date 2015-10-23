@@ -21,6 +21,7 @@ import projectmissinformation.model.User;
 
 /**
  * Servlet implementation class Login.
+ * 
  * @author Alex
  */
 @WebServlet("/LoginServlet")
@@ -60,27 +61,17 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		HttpSession session = request.getSession();
-		if(session != null) {
+		if (session != null) {
 			session.invalidate();
 		}
-		
-		Cookie[] loginCookies = request.getCookies();
-		if (loginCookies != null) {
-			for (Cookie c : loginCookies) {
-				if (c.getName().equals("username")) {
-					c.setMaxAge(0);
-					response.addCookie(c);
-					try {
-						Thread.sleep(2000);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					response.sendRedirect("/ProjectMissInformation/login.jsp");
-				}
-			}
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
+		response.sendRedirect("/ProjectMissInformation/login.jsp");
 	}
 
 	/**
@@ -99,21 +90,20 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		HttpSession session = request.getSession();
+
 		DBHandler dbH = new DBHandler();
-		
+
 		session.setMaxInactiveInterval(10080 * 60);
-		
+
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 
-		
 		try {
-			if (dbH.checkLogin(username, password)) {	
-				Cookie loginCookie = new Cookie("username", username);
-				loginCookie.setMaxAge(30 * 60);
-				response.addCookie(loginCookie);
+			if (dbH.checkLogin(username, password)) {
+				session.setAttribute("username", username);
+				session.setAttribute("adminStatus", dbH.getUser(username).getAdmin());
 				session.setAttribute("Authenticated", new Boolean(true));
 				response.sendRedirect("/ProjectMissInformation/home.jsp");
 			} else {

@@ -10,9 +10,10 @@
     <url-pattern>/contact.jsp</url-pattern>
     <url-pattern>/qoa.jsp</url-pattern>
     <url-pattern>/askquestion.jsp</url-pattern>
+    <url-pattern>/adminpage.jsp</url-pattern>
   </filter-mapping>
   <display-name>ProjectMissInformation</display-name>
   <welcome-file-list>
-    <welcome-file>welcome.jsp</welcome-file>
+    <welcome-file>login.jsp</welcome-file>
   </welcome-file-list>
 </web-app>

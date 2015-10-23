@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"
-    session = "true"%>
+    session = "false"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <!-- @Autor: Charlotte -->
@@ -9,23 +9,14 @@
 <link href="css/misslayout.css" rel="stylesheet" type="text/css" />
 <title>Login</title>
 
-<script type="text/javascript">
-function checkCookie() {
-    var cookieEnabled = (navigator.cookieEnabled) ? true : false;
-    if (typeof navigator.cookieEnabled == "undefined" && !cookieEnabled){ 
-        document.cookie = "testcookie";
-        cookieEnabled = (document.cookie.indexOf("testcookie") != -1) ? true : false;
-    }
-    return (cookieEnabled) ? true : showCookieFail();
-}
-
-function showCookieFail() {
-	alert("You have to enable cookies to use this site!");
-}
-</script>
 </head>
 <body>
-
+<%
+HttpSession session = request.getSession(false);
+if(null != session) {
+	session.invalidate();
+}
+%>
 	<form name="login" action="LoginServlet" method="post" onsubmit="checkCookie()">
 	<center><h1>LOGIN</h1></center>
 	<br>
