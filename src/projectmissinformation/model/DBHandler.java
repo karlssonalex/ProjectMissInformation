@@ -205,8 +205,12 @@ public class DBHandler {
 		case 1:
 			q = em.createQuery("SELECT q FROM Question as q where q.answer IS NULL");
 			break;
+		case 2:
+			q = em.createQuery("SELECT q FROM Question q");
+			break;
 		}
 		questionList = q.getResultList();
+		System.out.println(questionList.size());
 		em.close();
 		return questionList;
 	}
