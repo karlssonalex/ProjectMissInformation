@@ -24,7 +24,7 @@
 			<li><a href="askquestion.jsp" target="main">Ask for Advice</a></li>
 			<li><a href="QuestionServlet" target="main">Q&A</a></li>
 			<li><a href="donate.jsp" target="main">Donate</a></li>
-			<c:if test="${sessionScope.adminStatus == 1}">
+			<c:if test="${sessionScope.adminStatus == 2}">
 				<li><a href="adminpage.jsp" target="main">Admin</a></li>
 			</c:if>
 

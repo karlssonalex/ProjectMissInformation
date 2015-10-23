@@ -2,22 +2,15 @@ package projectmissinformation.controller;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
-import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import projectmissinformation.model.DBHandler;
-import projectmissinformation.model.User;
 
 /**
  * Servlet implementation class Login.
@@ -29,12 +22,6 @@ public class LoginServlet extends HttpServlet {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
-
-	/** The persistence unit name. */
-	private final String PERSISTENCE_UNIT_NAME = "ProjectMissInformation";
-
-	/** The factory. */
-	private EntityManagerFactory factory;
 
 	/**
 	 * Instantiates a new login.

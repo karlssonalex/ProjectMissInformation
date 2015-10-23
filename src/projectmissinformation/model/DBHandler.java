@@ -59,16 +59,15 @@ public class DBHandler {
 	}
 
 	/**
-	 * @author Axel
-	 * Updates admin status of user
-	 * @param name
-	 * @param admin
+	 * @author Axel Updates admin status of user
+	 * @param name The name of the user of which to change admin state
+	 * @param admin The state of the admin variable
 	 */
 	public void updateUser(String name, int admin) {
 
 		EntityManager em = factory.createEntityManager();
 		User updatedUser = em.find(User.class, name);
-		
+
 		em.getTransaction().begin();
 		updatedUser.setAdmin(admin);
 		em.getTransaction().commit();
@@ -97,8 +96,8 @@ public class DBHandler {
 	}
 
 	/**
-	 * @auth Axel
-	 * Creates a random String consisting of letters from the alphabet
+	 * @auth Axel Creates a random String consisting of letters from the
+	 *       alphabet
 	 * @return Returns the salt as String
 	 */
 	private String makeSalt() {
@@ -135,8 +134,8 @@ public class DBHandler {
 
 	/**
 	 * @auth Axel
-	 * @param input
-	 * @return
+	 * @param input The input string to validate
+	 * @return Returns true or false depending on result
 	 */
 	public boolean validateInput(String input) {
 		String allowedChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890@_.";
@@ -174,6 +173,7 @@ public class DBHandler {
 		factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 		EntityManager em = factory.createEntityManager();
 		Query q = em.createQuery("SELECT u FROM User u");
+		@SuppressWarnings("unchecked")
 		List<User> userList = q.getResultList();
 
 		for (User u : userList) {
@@ -217,7 +217,9 @@ public class DBHandler {
 	/**
 	 * @author Axel
 	 * @param ticketId
+	 *            The ticket id of the question you're answering
 	 * @param answer
+	 *            The answer you're providing to the question
 	 */
 	public void answerQuestion(int ticketId, String answer) {
 
@@ -232,7 +234,8 @@ public class DBHandler {
 	/**
 	 * @author Axel
 	 * @param password
-	 * @return
+	 *            The input that you wish to encrypt
+	 * @return The hash after salting
 	 * @throws UnsupportedEncodingException
 	 * @throws NoSuchAlgorithmException
 	 */

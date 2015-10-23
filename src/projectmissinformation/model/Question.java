@@ -14,8 +14,6 @@ import javax.persistence.*;
 public class Question implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-//	@SequenceGenerator(name="seqGen", allocationSize=1, initialValue=1)
-//	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seqGen")
 	@Id 
 	private int ticketid;
 
