@@ -210,7 +210,6 @@ public class DBHandler {
 			break;
 		}
 		questionList = q.getResultList();
-		System.out.println(questionList.size());
 		em.close();
 		return questionList;
 	}
