@@ -58,6 +58,23 @@ public class DBHandler {
 		return new User();
 	}
 
+	/**
+	 * @author Axel
+	 * Updates admin status of user
+	 * @param name
+	 * @param admin
+	 */
+	public void updateUser(String name, int admin) {
+
+		EntityManager em = factory.createEntityManager();
+		User updatedUser = em.find(User.class, name);
+		
+		em.getTransaction().begin();
+		updatedUser.setAdmin(admin);
+		em.getTransaction().commit();
+
+	}
+
 	/***
 	 * @author Charlotte
 	 * @throws NoSuchAlgorithmException
@@ -81,7 +98,8 @@ public class DBHandler {
 
 	/**
 	 * @auth Axel
-	 * @return
+	 * Creates a random String consisting of letters from the alphabet
+	 * @return Returns the salt as String
 	 */
 	private String makeSalt() {
 		char[] chars = "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ".toCharArray();
@@ -114,10 +132,9 @@ public class DBHandler {
 		em.getTransaction().commit();
 		em.close();
 	}
-	
 
 	/**
-	 * @auth
+	 * @auth Axel
 	 * @param input
 	 * @return
 	 */
@@ -240,6 +257,7 @@ public class DBHandler {
 
 	/**
 	 * Check login.
+	 * 
 	 * @author Alex
 	 * @param username
 	 *            the username

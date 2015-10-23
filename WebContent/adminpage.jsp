@@ -8,7 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link href="css/misslayout.css" rel="stylesheet" type="text/css">
-<title>QOA</title>
+<title>Admin page</title>
 </head>
 <body>
 	<center>
@@ -19,7 +19,7 @@
 						<form action="AdminServlet" name="form" method="post"
 							onsubmit="return checkField(this)">
 							<center>
-								<h1>CREATE NEW USER</h1>
+								<h1>CHANGE USER PRIVILEGES</h1>
 							</center>
 							<c:if test="${not empty error}">
 								<p style="color:red">${error}</p>
@@ -32,14 +32,11 @@
 									<td>Username: <input type="text" name="username"></td>
 								</tr>
 								<tr>
-									<td>Password: <input type="password" name="password"></td>
-								</tr>
-								<tr>
-									<td> Admin: <input type="radio" name="admin" value="1" checked> Yes <input type="radio" name="admin" value="0"> No </td>
+									<td> Privileges: <input type="radio" name="admin" value="0" checked> User <input type="radio" name="admin" value="1"> Admin </td> <input type="radio" name="admin" value="2"> Sysadmin </td>
 								</tr>
 								<tr>
 								<tr>
-									<td><button type="submit" value="Submit">CREATE</button>&ensp;
+									<td><button type="submit" value="Submit">SUBMIT</button>&ensp;
 										<button type="reset" value="Reset">RESET</button></td>
 							</table>
 
