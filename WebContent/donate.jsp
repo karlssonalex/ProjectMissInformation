@@ -22,7 +22,8 @@
 			'orderid' : "q10",
 			'paymentcollection' : "1",
 			'iframeheight' : "500",
-			'iframewidth' : "890"
+			'iframewidth' : "890",
+			'accepturl': "https://white-falls.se/test/target.jsp"
 		});
 		paymentwindow.append('payment-div');
 		paymentwindow.open();
