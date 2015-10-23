@@ -23,7 +23,7 @@
 			<li><a href="mainbox.jsp" target="main">Home</a></li>
 			<li><a href="askquestion.jsp" target="main">Ask for Advice</a></li>
 			<li><a href="QuestionServlet" target="main">Q&A</a></li>
-			<li><a href="payment.jsp" target="main">Contact</a></li>
+			<li><a href="donate.jsp" target="main">Donate</a></li>
 			<c:if test="${sessionScope.adminStatus == 1}">
 				<li><a href="adminpage.jsp" target="main">Admin</a></li>
 			</c:if>

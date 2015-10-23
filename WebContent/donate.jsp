@@ -2,10 +2,10 @@
 	pageEncoding="ISO-8859-1" session="false"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- @Autor: Alex -->
+<!-- @Author: Alex -->
 <head>
 <link href="css/misslayout.css" rel="stylesheet" type="text/css">
-<title>Payment</title>
+<title>Donate</title>
 </head>
 <body>
 <div id="payment-div"></div>
@@ -22,8 +22,7 @@
 			'orderid' : "q10",
 			'paymentcollection' : "1",
 			'iframeheight' : "500",
-			'iframewidth' : "890",
-			'accepturl' : "https://white-falls.se/test/target.jsp"
+			'iframewidth' : "890"
 		});
 		paymentwindow.append('payment-div');
 		paymentwindow.open();
