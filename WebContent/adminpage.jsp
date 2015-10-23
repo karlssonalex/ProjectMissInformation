@@ -32,7 +32,7 @@
 									<td>Username: <input type="text" name="username"></td>
 								</tr>
 								<tr>
-									<td> Privileges: <input type="radio" name="admin" value="0" checked> User <input type="radio" name="admin" value="1"> Admin </td> <input type="radio" name="admin" value="2"> Sysadmin </td>
+									<td> Privileges: <input type="radio" name="admin" value="0" checked> User <input type="radio" name="admin" value="1"> Admin <input type="radio" name="admin" value="2"> Sysadmin </td>
 								</tr>
 								<tr>
 								<tr>
